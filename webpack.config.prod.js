@@ -1,18 +1,48 @@
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default{
   debug: true,
   devtool: 'source-map',
   noInfo: false,
-  entry:[path.resolve(__dirname, 'src/index')],
+  entry:{
+    vendor: path.resolve(__dirname, 'src/vendor'),
+    main: path.resolve(__dirname, 'src/index')
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    // name is a placeholder depending on the bundle being output.
+    // it will be replace by the name we defined in the entry object (vendor, main etc)
+    filename: '[name].js'
   },
   plugins: [
+    // Use CommonsChunkPlugin to create a separate bundle
+    // of vendor libraries so that they're cached seperately (e.g. jquery, bootstrap etc).
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
+
+    // Create HTML file that includes reference to bundles JS.
+    new HtmlWebpackPlugin({
+      template:  'src/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
+      inject: true
+    }),
+
     // Minify JS
     new webpack.optimize.UglifyJsPlugin(),
 
