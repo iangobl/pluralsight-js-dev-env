@@ -1,6 +1,8 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackMd5Hash from 'webpack-md5-hash';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default{
   debug: true,
@@ -16,9 +18,17 @@ export default{
     publicPath: '/',
     // name is a placeholder depending on the bundle being output.
     // it will be replace by the name we defined in the entry object (vendor, main etc)
-    filename: '[name].js'
+    // chunk hash is used to implement cache busting, ensuring that js files are named
+    // differently when a change is made, forcing client to get new file.
+    filename: '[name].[chunkhash].js'
   },
   plugins: [
+    // Generate an external css file with a hash in the filename
+    new ExtractTextPlugin('[name].[contenthash].css'),
+
+    // Hash the files using MD5 so that their names change when the content changes.
+    new WebpackMd5Hash(),
+
     // Use CommonsChunkPlugin to create a separate bundle
     // of vendor libraries so that they're cached seperately (e.g. jquery, bootstrap etc).
     new webpack.optimize.CommonsChunkPlugin({
@@ -52,7 +62,7 @@ export default{
   module: {
     loaders:[
       {test: /\.js$/, exclude: /node_modules/, loaders:['babel']},
-      {test: /\.css$/, loaders:['style', 'css']}
+      {test: /\.css$/, loader: ExtractTextPlugin.extract('css?sourceMap')}
     ]
   }
 }
