@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./src/signature/signature.css" />
+</head>
+
+<body>
+  <h1>Signature Generator</h1>
+  <table id="SignatureForm">
+
+    <tr>
+      <td>First Name</td>
+      <td>
+        <input type="text" id="FirstNameTextBox" class="required" />
+      </td>
+    </tr>
+    <tr>
+
+      <td>Last Name</td>
+      <td>
+        <input type="text" id="LastNameTextBox"  class="required"/>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Office</td>
+      <td>
+        <select name="OfficeSelect" id="OfficeSelect">
+          <option value="1">Dublin, Ireland</option>
+          <option value="2">London, England</option>
+          <option value="3">Tokyo, Japan</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Telephone</td>
+      <td>
+        <span id="TelephonePrefix" class="phonePrefix"></span>
+        <input type="text" id="TelephoneTextBox" class="phone required" placeholder="Office Extension Number"/>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Mobile</td>
+      <td>
+        <span id="MobilePrefix" class="phonePrefix"></span>
+        <input type="text" id="MobileTextBox" class="phone" placeholder="Optional" />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Job Title</td>
+      <td>
+        <input type="text" id="JobTitleTextBox" class="phone required"/>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <button id="CreateButton">Create</button>
+        <button id="ClearButton">Clear</button>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div id='SignatureDiv' class="hidden">
+    <div>Copy and paste the below into your email signature.</div>
+    <div id="Signature"></div>
+  </div>
+</body>
+<script src="./src/signature/signature.js"></script>
+
+</html>
