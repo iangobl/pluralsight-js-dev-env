@@ -54,7 +54,8 @@ export default{
       // Properties you define here are available in index.html
       // using htmlWebpackPlugin.options.varName.
       // Leaving token blank as haven't set up a trackJS account
-      trackJSToken : ''
+      trackJSToken: '',
+      env: 'prod'
     }),
 
     // Minify JS

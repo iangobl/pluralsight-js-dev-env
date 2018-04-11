@@ -8,9 +8,9 @@ describe('Our first test', () => {
   });
 });
 
-// Unit test to ensure that the first H1 of the page says "Hello World!"
+// Unit test to ensure that the first H1 of the page says "Signature Generator"
 describe('index.html', ()=>{
-  it('should have h1 that says Users', (done) =>{
+  it('should have h1 that says Signature Generator', (done) =>{
     const index = fs.readFileSync('./src/index.html', "utf-8");
     jsdom.env(index, function(err, window){
       const h1 = window.document.getElementsByTagName('h1')[0];

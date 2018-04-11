@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <% if(htmlWebpackPlugin.options.trackJSToken) { %>
       <!-- Begin TrackJs -->
       <!-- leaving token empty as I do not want to set up  -->
@@ -20,74 +20,79 @@
       <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
       <!-- End TrackJs -->
       <% } %>
-  <meta charset="UTF-8">
-</head>
 
-<body>
-  <h1>Signature Generator</h1>
-  <table id="SignatureForm">
+      <meta charset="UTF-8">
+    </head>
 
-    <tr>
-      <td>First Name</td>
-      <td>
-        <input type="text" id="FirstNameTextBox" class="required" />
-      </td>
-    </tr>
-    <tr>
+    <body>
+      <h1>Signature Generator</h1>
+      <table id="SignatureForm">
 
-      <td>Last Name</td>
-      <td>
-        <input type="text" id="LastNameTextBox"  class="required"/>
-      </td>
-    </tr>
+        <tr>
+          <td>First Name</td>
+          <td>
+            <input type="text" id="FirstNameTextBox" class="required" />
+          </td>
+        </tr>
+        <tr>
 
-    <tr>
-      <td>Office</td>
-      <td>
-        <select name="OfficeSelect" id="OfficeSelect">
-          <option value="1">Dublin, Ireland</option>
-          <option value="2">London, England</option>
-          <option value="3">Tokyo, Japan</option>
-        </select>
-      </td>
-    </tr>
+          <td>Last Name</td>
+          <td>
+            <input type="text" id="LastNameTextBox"  class="required"/>
+          </td>
+        </tr>
 
-    <tr>
-      <td>Telephone</td>
-      <td>
-        <span id="TelephonePrefix" class="phonePrefix"></span>
-        <input type="text" id="TelephoneTextBox" class="phone required" placeholder="Office Extension Number"/>
-      </td>
-    </tr>
+        <tr>
+          <td>Office</td>
+          <td>
+            <select name="OfficeSelect" id="OfficeSelect">
+              <option value="1">Dublin, Ireland</option>
+              <option value="2">London, England</option>
+              <option value="3">Tokyo, Japan</option>
+            </select>
+          </td>
+        </tr>
 
-    <tr>
-      <td>Mobile</td>
-      <td>
-        <span id="MobilePrefix" class="phonePrefix"></span>
-        <input type="text" id="MobileTextBox" class="phone" placeholder="Optional" />
-      </td>
-    </tr>
+        <tr>
+          <td>Telephone</td>
+          <td>
+            <span id="TelephonePrefix" class="phonePrefix"></span>
+            <input type="text" id="TelephoneTextBox" class="phone required" placeholder="Office Extension Number"/>
+          </td>
+        </tr>
 
-    <tr>
-      <td>Job Title</td>
-      <td>
-        <input type="text" id="JobTitleTextBox" class="phone required"/>
-      </td>
-    </tr>
+        <tr>
+          <td>Mobile</td>
+          <td>
+            <span id="MobilePrefix" class="phonePrefix"></span>
+            <input type="text" id="MobileTextBox" class="phone" placeholder="Optional" />
+          </td>
+        </tr>
 
-    <tr>
-      <td>
-        <button id="CreateButton">Create</button>
-        <button id="ClearButton">Clear</button>
-      </td>
-      <td></td>
-    </tr>
-  </table>
+        <tr>
+          <td>Job Title</td>
+          <td>
+            <input type="text" id="JobTitleTextBox" class="phone required"/>
+          </td>
+        </tr>
 
-  <div id='SignatureDiv' class="hidden">
-    <div>Copy and paste the below into your email signature.</div>
-    <div id="Signature"></div>
-  </div>
-</body>
+        <tr>
+          <td>
+            <button id="CreateButton">Create</button>
+            <button id="ClearButton">Clear</button>
+          </td>
+          <td></td>
+        </tr>
+      </table>
 
-</html>
+      <div id='SignatureDiv' class="hidden">
+        <div>Copy and paste the below into your email signature.</div>
+        <div id="Signature"></div>
+      </div>
+    </body>
+
+    <% if(htmlWebpackPlugin.options.env == "dev") { %>
+      <!-- Only make call to populate the mock data in a development environment -->
+      <script src="././buildScripts/populateMockData.js"></script>
+      <% } %>
+    </html>
